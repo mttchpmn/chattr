@@ -7,9 +7,9 @@ io.on("connection", socket => {
   const { id } = socket;
 
   console.log(`${id} has connected`);
-  socket.on("chat message", msg => {
-    console.log(`${id} : ${msg}`);
-    io.emit("chat message", msg);
+  socket.on("chat message", ({ name, text }) => {
+    console.log(`${name} : ${text}`);
+    io.emit("chat message", { name, text });
   });
 });
 
