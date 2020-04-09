@@ -42,13 +42,16 @@ class App extends React.Component {
   }
 
   renderChat() {
-    const { messages } = this.state;
+    const { name, messages } = this.state;
 
     return (
       <div>
         {messages.map((msg, i) => (
           <div key={i}>
-            {msg.name} : {msg.text}
+            <span style={{ color: name === msg.name ? "blue" : "red" }}>
+              {msg.name}: $
+            </span>{" "}
+            {msg.text}
           </div>
         ))}
       </div>
