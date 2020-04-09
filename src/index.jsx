@@ -29,14 +29,14 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     const { msg, name } = this.state;
+    if (msg === "") return;
 
     const payload = {
       name,
       text: msg,
     };
-
-    e.preventDefault();
     socket.emit("chat message", payload);
     this.setState({ msg: "" });
   }
