@@ -21,58 +21,66 @@ function HomeScreen({ handleSubmit }) {
 
         <h2>Create or join room</h2>
 
-        <div className="nes-field">
-          <label for="name">Your name</label>
-          <input
-            className="nes-input"
-            type="text"
-            autoComplete="off"
-            id="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-        </div>
+        <form>
+          <div className="nes-field">
+            <label htmlFor="name">Your name</label>
+            <input
+              className="nes-input"
+              type="text"
+              autoComplete="off"
+              id="name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+          </div>
 
-        <div className="nes-field">
-          <label for="join-id">Room ID</label>
-          <input
-            className="nes-input"
-            type="text"
-            id="join-id"
-            autoComplete="off"
-            placeholder="Leave blank to create room"
-            value={joinID}
-            onChange={e => setJoinID(e.target.value)}
-          />
-        </div>
+          <div className="nes-field">
+            <label htmlFor="join-id">Room ID</label>
+            <input
+              className="nes-input"
+              type="text"
+              id="join-id"
+              autoComplete="off"
+              placeholder="Leave blank to create room"
+              value={joinID}
+              onChange={e => setJoinID(e.target.value)}
+            />
+          </div>
 
-        <div>
-          {joinID === "" ? (
-            <button
-              type="button"
-              style={{ marginTop: 30 }}
-              className="nes-btn is-primary"
-              onClick={() => {
-                socket.emit("create");
-                handleSubmit(name);
-              }}
-            >
-              Create Room
-            </button>
-          ) : (
-            <button
-              type="button"
-              style={{ marginTop: 30 }}
-              className="nes-btn is-primary"
-              onClick={() => {
-                socket.emit("create");
-                handleSubmit(name);
-              }}
-            >
-              Join Room
-            </button>
-          )}
-        </div>
+          <div>
+            {joinID === "" ? (
+              <button
+                type="submit"
+                style={{ marginTop: 30 }}
+                className={
+                  name === "" ? "nes-btn is-dsiabled" : "nes-btn is-primary"
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  socket.emit("create");
+                  handleSubmit(name);
+                }}
+              >
+                Create Room
+              </button>
+            ) : (
+              <button
+                type="submit"
+                style={{ marginTop: 30 }}
+                className={
+                  name === "" ? "nes-btn is-dsiabled" : "nes-btn is-primary"
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  socket.emit("join", joinID);
+                  handleSubmit(name);
+                }}
+              >
+                Join Room
+              </button>
+            )}
+          </div>
+        </form>
       </div>
     </div>
   );
