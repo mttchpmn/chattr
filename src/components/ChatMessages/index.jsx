@@ -1,6 +1,6 @@
 import React from "react";
 
-function ChatMessages({ name, messages }) {
+function ChatMessages({ name, messages, announcement }) {
   const messagesEndRef = React.useRef(null);
 
   // Automatically scroll to bottom when new message comes in
@@ -33,9 +33,14 @@ function ChatMessages({ name, messages }) {
         height: "100%",
         overflowY: "scroll",
         flexGrow: 1,
+        paddingTop: 5,
         margin: 10,
       }}
     >
+      <div style={{ textAlign: "center", minHeight: 24 }}>
+        {announcement ? announcement : ""}
+      </div>
+
       <section className="message-list">
         {messages.map((msg, i) => (
           <div key={i}>

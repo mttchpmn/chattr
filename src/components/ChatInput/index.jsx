@@ -29,7 +29,10 @@ function ChatInput({ name, roomID }) {
         <input
           className="nes-input"
           value={message}
-          onChange={e => setMessage(e.target.value)}
+          onChange={e => {
+            setMessage(e.target.value);
+            socket.emit("typing", { name, roomID });
+          }}
           placeholder="Type a message"
           autoComplete="off"
         />

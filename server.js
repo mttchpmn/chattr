@@ -25,6 +25,11 @@ io.on("connection", socket => {
     io.to(id).emit("join", joinID);
   });
 
+  socket.on("typing", ({ name, roomID }) => {
+    console.log(`${name} is typing`);
+    socket.to(roomID).broadcast.emit("typing", name);
+  });
+
   socket.on("chat message", ({ roomID, name, text }) => {
     io.to(roomID).emit("chat message", { name, text });
   });

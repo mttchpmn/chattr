@@ -12,14 +12,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.timer = null;
+
     this.state = {
       roomID: null,
       messages: [],
       name: "",
+      announcement: null,
     };
   }
 
   componentDidMount() {
+    socket.on("typing", name => {
+      this.setState({ announcement: `${name} is typing...` });
+      this.timer = setTimeout(() => this.setState({ typing: false }), 2000);
+    });
+
     socket.on("chat message", msg => {
       const { messages } = this.state;
       this.setState({ messages: [...messages, msg] });
@@ -32,10 +40,18 @@ class App extends React.Component {
     socket.on("join", roomID => {
       this.setState({ roomID });
     });
+
+    socket.on("new member", ({ roomID, name }) => {
+      this.setState({ roomID, announcement: `${name} joined the room` });
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   render() {
-    const { roomID, name, messages } = this.state;
+    const { roomID, name, messages, announcement } = this.state;
 
     if (!roomID)
       return <HomeScreen handleSubmit={name => this.setState({ name })} />;
@@ -49,7 +65,11 @@ class App extends React.Component {
         }}
       >
         <ChatHeader name={name} roomID={roomID} />
-        <ChatMessages name={name} messages={messages} />
+        <ChatMessages
+          name={name}
+          messages={messages}
+          announcement={announcement}
+        />
         <ChatInput name={name} roomID={roomID} />
       </div>
     );
