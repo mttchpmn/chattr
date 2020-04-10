@@ -16,8 +16,8 @@ io.on("connection", socket => {
     io.to(id).emit("join", joinID);
   });
 
-  socket.on("chat message", ({ name, text }) => {
-    io.emit("chat message", { name, text });
+  socket.on("chat message", ({ roomID, name, text }) => {
+    io.to(roomID).emit("chat message", { name, text });
   });
 });
 
