@@ -37,8 +37,8 @@ class App extends React.Component {
   render() {
     const { roomID, name, messages } = this.state;
 
-    // if (!roomID)
-    //   return <HomeScreen handleSubmit={name => this.setState({ name })} />;
+    if (!roomID)
+      return <HomeScreen handleSubmit={name => this.setState({ name })} />;
 
     return (
       <div
@@ -48,7 +48,7 @@ class App extends React.Component {
           flexDirection: "column",
         }}
       >
-        <ChatHeader name={"Matt"} roomID={"foobarbaz"} />
+        <ChatHeader name={name} roomID={roomID} />
         <ChatMessages name={name} messages={messages} />
         <ChatInput name={name} />
       </div>
