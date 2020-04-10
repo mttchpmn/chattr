@@ -50,7 +50,7 @@ class App extends React.Component {
       >
         <ChatHeader name={name} roomID={roomID} />
         <ChatMessages name={name} messages={messages} />
-        <ChatInput name={name} />
+        <ChatInput name={name} roomID={roomID} />
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from "react";
 
 import socket from "../../socket";
 
-function ChatInput({ name }) {
+function ChatInput({ name, roomID }) {
   const [message, setMessage] = React.useState("");
 
   const handleSubmit = e => {
@@ -10,6 +10,7 @@ function ChatInput({ name }) {
     if (!message) return;
 
     const payload = {
+      roomID,
       name,
       text: message,
     };

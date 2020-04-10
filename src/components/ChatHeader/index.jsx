@@ -7,7 +7,7 @@ function ChatHeader({ name, roomID }) {
     <div className="nes-container is-rounded" style={{ margin: 10 }}>
       <h1>chattr.</h1>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <span>Hi Matt!</span>
+        <span>Hi {name}!</span>
         <CopyToClipboard
           text={roomID}
           onCopy={() => alert("Copied Room ID to clipboard!")}
