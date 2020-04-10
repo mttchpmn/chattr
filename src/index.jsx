@@ -9,6 +9,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      roomID: null,
+      joinID: "",
       msg: "",
       messages: [],
       name: "",
@@ -18,9 +20,13 @@ class App extends React.Component {
   componentDidMount() {
     socket.on("chat message", msg => {
       const { messages } = this.state;
-      console.log(`${msg.name} : ${msg.text}`);
+      // console.log(`${msg.name} : ${msg.text}`);
       this.setState({ messages: [...messages, msg] });
-      console.log("this.state :", this.state);
+    });
+
+    socket.on("create", roomID => {
+      console.log("CREATE EMITTED FROM SERVER : " + roomID);
+      this.setState({ roomID });
     });
   }
 
@@ -41,6 +47,43 @@ class App extends React.Component {
     this.setState({ msg: "" });
   }
 
+  renderRoomSelect() {
+    const { joinID } = this.state;
+
+    return (
+      <div>
+        <h2>Create or join room</h2>
+
+        <div>
+          <button
+            onClick={() => {
+              socket.emit("create");
+            }}
+          >
+            Create
+          </button>
+        </div>
+
+        <div>
+          <input
+            name="joinID"
+            value={joinID}
+            autoComplete="off"
+            onChange={e => this.handleTextChange(e)}
+          />
+          <button
+            onClick={() => {
+              socket.emit("join", joinID);
+              this.setState({ roomID: joinID });
+            }}
+          >
+            Join
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   renderChat() {
     const { name, messages } = this.state;
 
@@ -59,11 +102,14 @@ class App extends React.Component {
   }
 
   render() {
-    const { msg, name } = this.state;
+    const { roomID, msg, name } = this.state;
+
+    if (!roomID) return this.renderRoomSelect();
 
     return (
       <div>
         <h1>chattr.</h1>
+        <p>Connected to {roomID}</p>
         <div>
           Enter your name:
           <input
