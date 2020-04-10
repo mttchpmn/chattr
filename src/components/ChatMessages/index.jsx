@@ -33,7 +33,7 @@ function ChatMessages({ name, messages }) {
         height: "100%",
         overflow: "scroll",
         flexGrow: 1,
-        margin: 5,
+        margin: 10,
       }}
     >
       <section className="message-list">
