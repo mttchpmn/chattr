@@ -2,15 +2,21 @@ import React from "react";
 
 function ChatMessages({ name, messages }) {
   const ownMessage = msg => (
-    <section className="message -right">
-      <div className="nes-balloon from-right">{msg}</div>
-    </section>
+    <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <section className="message -right">
+        <div className="nes-balloon from-right">{msg.text}</div>
+        <p style={{ textAlign: "right" }}>Me</p>
+      </section>
+    </div>
   );
 
   const otherMessage = msg => (
-    <section className="message -left">
-      <div className="nes-balloon from-left">{msg}</div>
-    </section>
+    <div style={{ display: "flex", justifyContent: "flex-start" }}>
+      <section className="message -left">
+        <div className="nes-balloon from-left">{msg.text}</div>
+        <p>{msg.name}</p>
+      </section>
+    </div>
   );
 
   return (
@@ -18,6 +24,7 @@ function ChatMessages({ name, messages }) {
       className="nes-container"
       style={{
         height: "100%",
+        overflow: "scroll",
         flexGrow: 1,
         margin: 5,
       }}
@@ -25,7 +32,7 @@ function ChatMessages({ name, messages }) {
       <section className="message-list">
         {messages.map((msg, i) => (
           <div key={i}>
-            {msg.name === name ? ownMessage(msg.text) : otherMessage(msg.text)}
+            {msg.name === name ? ownMessage(msg) : otherMessage(msg)}
           </div>
         ))}
       </section>
