@@ -1,12 +1,26 @@
 import React from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function ChatHeader({ name, roomID }) {
+  const [color, setColor] = React.useState("#aaa");
   return (
-    <div>
+    <div className="nes-container is-rounded" style={{ margin: 10 }}>
       <h1>chattr.</h1>
-      <p>
-        Hi {name}, you're connected to {roomID}
-      </p>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span>Hi Matt!</span>
+        <CopyToClipboard
+          text={roomID}
+          onCopy={() => alert("Copied Room ID to clipboard!")}
+        >
+          <span
+            onMouseEnter={() => setColor("#006bb3")}
+            onMouseLeave={() => setColor("#aaa")}
+            style={{ textAlign: "right", color: color }}
+          >
+            Room ID: {roomID}
+          </span>
+        </CopyToClipboard>
+      </div>
     </div>
   );
 }

@@ -31,7 +31,7 @@ function ChatMessages({ name, messages }) {
       className="nes-container"
       style={{
         height: "100%",
-        overflow: "scroll",
+        overflowY: "scroll",
         flexGrow: 1,
         margin: 10,
       }}
