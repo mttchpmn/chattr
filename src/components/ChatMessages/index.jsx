@@ -1,6 +1,13 @@
 import React from "react";
 
 function ChatMessages({ name, messages }) {
+  const messagesEndRef = React.useRef(null);
+
+  // Automatically scroll to bottom when new message comes in
+  React.useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const ownMessage = msg => (
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
       <section className="message -right">
@@ -35,6 +42,7 @@ function ChatMessages({ name, messages }) {
             {msg.name === name ? ownMessage(msg) : otherMessage(msg)}
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </section>
     </div>
   );
