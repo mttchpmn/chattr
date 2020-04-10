@@ -18,22 +18,34 @@ function ChatInput({ name }) {
   };
 
   return (
-    <form style={{ position: "fixed", bottom: 0, width: "100%", padding: 5 }}>
-      <input
-        value={message}
-        onChange={e => setMessage(e.target.value)}
-        placeholder="Type a message"
-        autoComplete="off"
-        style={{ width: "80%" }}
-      />
-      <button
-        type="submit"
-        onClick={e => handleSubmit(e)}
-        style={{ width: "10%" }}
-      >
-        Send
-      </button>
-    </form>
+    <div
+      style={{
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        padding: 5,
+      }}
+    >
+      <form style={{ width: "100%", display: "flex" }}>
+        <input
+          className="nes-input"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          placeholder="Type a message"
+          autoComplete="off"
+        />
+        <button
+          className={
+            message === "" ? "nes-btn is-disabled" : "nes-btn is-primary"
+          }
+          type="submit"
+          onClick={e => handleSubmit(e)}
+          style={{ minWidth: 200 }}
+        >
+          Send
+        </button>
+      </form>
+    </div>
   );
 }
 
