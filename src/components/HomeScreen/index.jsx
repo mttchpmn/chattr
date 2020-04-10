@@ -7,39 +7,72 @@ function HomeScreen({ handleSubmit }) {
   const [joinID, setJoinID] = React.useState("");
 
   return (
-    <div>
-      <h2>Create or join room</h2>
+    <div style={{ height: "100vh", display: "grid" }}>
+      <div
+        className="nes-container with-title is-centered"
+        style={{
+          width: "50%",
+          margin: "auto",
+          maxWidth: "600px",
+          backgroundColor: "#fff",
+        }}
+      >
+        <p className="title">chattr</p>
 
-      <div>
-        Enter your name:
-        <input value={name} onChange={e => setName(e.target.value)} />
-      </div>
+        <h2>Create or join room</h2>
 
-      <div>
-        <button
-          onClick={() => {
-            socket.emit("create");
-            handleSubmit(name);
-          }}
-        >
-          Create
-        </button>
-      </div>
+        <div className="nes-field">
+          <label for="name">Your name</label>
+          <input
+            className="nes-input"
+            type="text"
+            autoComplete="off"
+            id="name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+        </div>
 
-      <div>
-        <input
-          value={joinID}
-          autoComplete="off"
-          onChange={e => setJoinID(e.target.value)}
-        />
-        <button
-          onClick={() => {
-            socket.emit("join", joinID);
-            handleSubmit(name);
-          }}
-        >
-          Join
-        </button>
+        <div className="nes-field">
+          <label for="join-id">Room ID</label>
+          <input
+            className="nes-input"
+            type="text"
+            id="join-id"
+            autoComplete="off"
+            placeholder="Leave blank to create room"
+            value={joinID}
+            onChange={e => setJoinID(e.target.value)}
+          />
+        </div>
+
+        <div>
+          {joinID === "" ? (
+            <button
+              type="button"
+              style={{ marginTop: 30 }}
+              className="nes-btn is-primary"
+              onClick={() => {
+                socket.emit("create");
+                handleSubmit(name);
+              }}
+            >
+              Create Room
+            </button>
+          ) : (
+            <button
+              type="button"
+              style={{ marginTop: 30 }}
+              className="nes-btn is-primary"
+              onClick={() => {
+                socket.emit("create");
+                handleSubmit(name);
+              }}
+            >
+              Join Room
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
