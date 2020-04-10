@@ -12,7 +12,7 @@ function ChatMessages({ name, messages }) {
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
       <section className="message -right">
         <div className="nes-balloon from-right">{msg.text}</div>
-        <p style={{ textAlign: "right" }}>Me</p>
+        <p style={{ textAlign: "right", marginBottom: 0 }}>Me</p>
       </section>
     </div>
   );
@@ -21,7 +21,7 @@ function ChatMessages({ name, messages }) {
     <div style={{ display: "flex", justifyContent: "flex-start" }}>
       <section className="message -left">
         <div className="nes-balloon from-left">{msg.text}</div>
-        <p>{msg.name}</p>
+        <p style={{ marginBottom: 0 }}>{msg.name}</p>
       </section>
     </div>
   );

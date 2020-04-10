@@ -39,7 +39,7 @@ function ChatInput({ name, roomID }) {
           }
           type="submit"
           onClick={e => handleSubmit(e)}
-          style={{ minWidth: 200 }}
+          style={{ minWidth: 200, marginLeft: 10 }}
         >
           Send
         </button>

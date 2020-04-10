@@ -13,7 +13,7 @@ function ChatHeader({ name, roomID }) {
           onCopy={() => alert("Copied Room ID to clipboard!")}
         >
           <span
-            onMouseEnter={() => setColor("#006bb3")}
+            onMouseEnter={() => setColor("#209cee")}
             onMouseLeave={() => setColor("#aaa")}
             style={{ textAlign: "right", color: color }}
           >
