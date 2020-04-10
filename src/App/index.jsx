@@ -6,6 +6,8 @@ import ChatMessages from "../components/ChatMessages";
 import ChatHeader from "../components/ChatHeader";
 import socket from "../socket";
 
+import "./app.css";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,12 +37,18 @@ class App extends React.Component {
   render() {
     const { roomID, name, messages } = this.state;
 
-    if (!roomID)
-      return <HomeScreen handleSubmit={name => this.setState({ name })} />;
+    // if (!roomID)
+    //   return <HomeScreen handleSubmit={name => this.setState({ name })} />;
 
     return (
-      <div>
-        <ChatHeader name={name} roomID={roomID} />
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <ChatHeader name={"Matt"} roomID={"foobarbaz"} />
         <ChatMessages name={name} messages={messages} />
         <ChatInput name={name} />
       </div>
