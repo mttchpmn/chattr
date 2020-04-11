@@ -13,7 +13,6 @@ import ChatNoticationBar from "../components/ChatNotificationBar";
 // - Use short uuids for rooms
 // - Notification when members leave
 // - Input and error handling
-// - Add exit button
 
 class App extends React.Component {
   constructor(props) {

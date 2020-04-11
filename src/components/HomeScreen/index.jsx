@@ -12,7 +12,7 @@ function HomeScreen({ handleSubmit }) {
       style={{ height: "100vh", display: "grid", backgroundColor: randomColor }}
     >
       <div
-        className="nes-container with-title is-centered"
+        className="nes-container with-title is-rounded is-centered"
         style={{
           width: "50%",
           margin: "auto",
