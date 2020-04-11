@@ -34,7 +34,6 @@ io.on("connection", socket => {
   });
 
   socket.on("typing", ({ name, roomID }) => {
-    console.log(`${name} is typing`);
     socket.to(roomID).broadcast.emit("typing", name);
   });
 
