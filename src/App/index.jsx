@@ -7,6 +7,7 @@ import ChatHeader from "../components/ChatHeader";
 import socket from "../socket";
 
 import "./app.css";
+import ChatNoticationBar from "../components/ChatNotificationBar";
 
 // TODO
 // - Use short uuids for rooms
@@ -29,15 +30,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    socket.on("typing", name => {
-      clearTimeout(this.timer);
-      this.setState({ announcement: `${name} is typing...` });
-      this.timer = setTimeout(
-        () => this.setState({ announcement: null }),
-        2000
-      );
-    });
-
     socket.on("chat message", msg => {
       const { messages } = this.state;
       this.setState({ messages: [...messages, msg] });
@@ -49,15 +41,6 @@ class App extends React.Component {
 
     socket.on("join", roomID => {
       this.setState({ roomID });
-    });
-
-    socket.on("new member", name => {
-      clearTimeout(this.timer);
-      this.setState({ announcement: `${name} joined the room` });
-      this.timer = setTimeout(
-        () => this.setState({ announcement: null }),
-        2000
-      );
     });
   }
 
@@ -84,6 +67,7 @@ class App extends React.Component {
           roomID={roomID}
           handleExit={() => this.setState({ roomID: null })}
         />
+        <ChatNoticationBar />
         <ChatMessages
           name={name}
           messages={messages}
