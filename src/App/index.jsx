@@ -8,6 +8,14 @@ import socket from "../socket";
 
 import "./app.css";
 
+// TODO
+// - Use short uuids for rooms
+// - Notification when members join and leave
+// - Fix announcement duration
+// - Input and error handling
+// - Randomise header color
+// - Add exit button
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,8 +32,12 @@ class App extends React.Component {
 
   componentDidMount() {
     socket.on("typing", name => {
+      clearTimeout(this.timer);
       this.setState({ announcement: `${name} is typing...` });
-      this.timer = setTimeout(() => this.setState({ typing: false }), 2000);
+      this.timer = setTimeout(
+        () => this.setState({ announcement: null }),
+        2000
+      );
     });
 
     socket.on("chat message", msg => {
