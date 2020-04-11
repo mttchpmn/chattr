@@ -3,7 +3,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { randomColor } from "../colors";
 
 function ChatHeader({ name, roomID }) {
-  // const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const [color, setColor] = React.useState("#505050");
 
   return (
