@@ -10,10 +10,8 @@ import "./app.css";
 
 // TODO
 // - Use short uuids for rooms
-// - Notification when members join and leave
-// - Fix announcement duration
+// - Notification when members leave
 // - Input and error handling
-// - Randomise header color
 // - Add exit button
 
 class App extends React.Component {

@@ -1,13 +1,16 @@
 import React from "react";
 
 import socket from "../../socket";
+import { randomColor } from "../colors";
 
 function HomeScreen({ handleSubmit }) {
   const [name, setName] = React.useState("");
   const [joinID, setJoinID] = React.useState("");
 
   return (
-    <div style={{ height: "100vh", display: "grid" }}>
+    <div
+      style={{ height: "100vh", display: "grid", backgroundColor: randomColor }}
+    >
       <div
         className="nes-container with-title is-centered"
         style={{
