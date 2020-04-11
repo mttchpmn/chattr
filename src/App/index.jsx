@@ -79,7 +79,11 @@ class App extends React.Component {
           flexDirection: "column",
         }}
       >
-        <ChatHeader name={name} roomID={roomID} />
+        <ChatHeader
+          name={name}
+          roomID={roomID}
+          handleExit={() => this.setState({ roomID: null })}
+        />
         <ChatMessages
           name={name}
           messages={messages}
