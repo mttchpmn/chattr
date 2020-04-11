@@ -74,7 +74,7 @@ function HomeScreen({ handleSubmit }) {
                 style={{ marginTop: 30 }}
                 disabled={name === ""}
                 className={
-                  name === "" ? "nes-btn is-disabled" : "nes-btn is-primary"
+                  name === "" ? "nes-btn is-disabled" : "nes-btn is-success"
                 }
                 onClick={e => {
                   e.preventDefault();
