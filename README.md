@@ -1,3 +1,27 @@
-## chattr.
+# chattr.
 
-A simple chat app designed as a proof-of-concept and sandbox for using React with Socket.io
+A retro chatroom app inspired by the glorious days of 8 bit design. Built as a fun proof-of-concept to demonstate the basics of websocket use using the Socket.io lobrary.
+
+## Screens
+
+Home screen
+![Home](/screenshots/home.png)
+
+Chat screen
+![Chat](/screenshots/home.png)
+
+## Features
+
+Chattr supports the following out of the box:
+
+- Chat rooms
+- Multiple participants
+- 'User is typing' notifications
+- Brower tab bar notifications
+- 'User has joined/left' notifications
+
+## Stack
+
+- ReactJS for client
+- Express / Socket.io for server
+- NES.css for design
