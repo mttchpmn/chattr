@@ -41,7 +41,7 @@ function HomeScreen({ handleSubmit }) {
               type="text"
               id="join-id"
               autoComplete="off"
-              placeholder="Leave blank to create room"
+              placeholder="Leave blank for new room"
               value={joinID}
               onChange={e => setJoinID(e.target.value)}
             />
@@ -52,11 +52,13 @@ function HomeScreen({ handleSubmit }) {
               <button
                 type="submit"
                 style={{ marginTop: 30 }}
+                disabled={name === ""}
                 className={
-                  name === "" ? "nes-btn is-dsiabled" : "nes-btn is-primary"
+                  name === "" ? "nes-btn is-disabled" : "nes-btn is-primary"
                 }
                 onClick={e => {
                   e.preventDefault();
+                  // CREATE A NEW ROOM
                   socket.emit("create");
                   handleSubmit(name);
                 }}
@@ -67,12 +69,14 @@ function HomeScreen({ handleSubmit }) {
               <button
                 type="submit"
                 style={{ marginTop: 30 }}
+                disabled={name === ""}
                 className={
-                  name === "" ? "nes-btn is-dsiabled" : "nes-btn is-primary"
+                  name === "" ? "nes-btn is-disabled" : "nes-btn is-primary"
                 }
                 onClick={e => {
                   e.preventDefault();
-                  socket.emit("join", joinID);
+                  // JOIN EXISTING ROOM WITH ID: joinID
+                  socket.emit("join", { joinID, name });
                   handleSubmit(name);
                 }}
               >

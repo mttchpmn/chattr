@@ -20,9 +20,10 @@ io.on("connection", socket => {
     io.to(id).emit("create", id);
   });
 
-  socket.on("join", joinID => {
+  socket.on("join", ({ joinID, name }) => {
     socket.join(joinID);
     io.to(id).emit("join", joinID);
+    socket.to(joinID).emit("new member", name);
   });
 
   socket.on("typing", ({ name, roomID }) => {

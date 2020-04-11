@@ -53,8 +53,13 @@ class App extends React.Component {
       this.setState({ roomID });
     });
 
-    socket.on("new member", ({ roomID, name }) => {
-      this.setState({ roomID, announcement: `${name} joined the room` });
+    socket.on("new member", name => {
+      clearTimeout(this.timer);
+      this.setState({ announcement: `${name} joined the room` });
+      this.timer = setTimeout(
+        () => this.setState({ announcement: null }),
+        2000
+      );
     });
   }
 
