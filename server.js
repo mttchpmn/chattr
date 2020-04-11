@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+const shortid = require("shortid");
 const path = require("path");
 const PORT = process.env.PORT || 4000;
 
@@ -17,7 +18,9 @@ io.on("connection", socket => {
   console.log(`${id} has connected`);
 
   socket.on("create", () => {
-    io.to(id).emit("create", id);
+    const newID = shortid.generate();
+    socket.join(newID);
+    io.to(newID).emit("create", newID);
   });
 
   socket.on("join", ({ joinID, name }) => {

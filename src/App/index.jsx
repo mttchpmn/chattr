@@ -10,8 +10,6 @@ import "./app.css";
 import ChatNoticationBar from "../components/ChatNotificationBar";
 
 // TODO
-// - Use short uuids for rooms
-// - Notification when members leave
 // - Input and error handling
 // - Flash title when new message
 
