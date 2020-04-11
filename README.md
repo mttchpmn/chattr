@@ -8,7 +8,7 @@ Home screen
 ![Home](/screenshots/home.png)
 
 Chat screen
-![Chat](/screenshots/home.png)
+![Chat](/screenshots/chat.png)
 
 ## Features
 
