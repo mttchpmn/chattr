@@ -11,7 +11,6 @@ import ChatNoticationBar from "../components/ChatNotificationBar";
 
 // TODO
 // - Input and error handling
-// - Flash title when new message
 
 class App extends React.Component {
   constructor(props) {
@@ -24,13 +23,15 @@ class App extends React.Component {
       messages: [],
       name: "",
       announcement: null,
+      unread: 0,
     };
   }
 
   componentDidMount() {
     socket.on("chat message", msg => {
-      const { messages } = this.state;
-      this.setState({ messages: [...messages, msg] });
+      const { messages, unread } = this.state;
+      this.setState({ messages: [...messages, msg], unread: unread + 1 });
+      if (document.hidden) document.title = `chattr (${unread})`;
     });
 
     socket.on("create", roomID => {
@@ -78,7 +79,14 @@ class App extends React.Component {
           messages={messages}
           announcement={announcement}
         />
-        <ChatInput name={name} roomID={roomID} />
+        <ChatInput
+          name={name}
+          roomID={roomID}
+          handleFocus={() => {
+            this.setState({ unread: 0 });
+            document.title = "chattr";
+          }}
+        />
       </div>
     );
   }

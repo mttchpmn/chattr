@@ -2,7 +2,7 @@ import React from "react";
 
 import socket from "../../socket";
 
-function ChatInput({ name, roomID }) {
+function ChatInput({ name, roomID, handleFocus }) {
   const [message, setMessage] = React.useState("");
 
   const handleSubmit = e => {
@@ -29,6 +29,7 @@ function ChatInput({ name, roomID }) {
         <input
           className="nes-input"
           value={message}
+          onFocus={() => handleFocus()}
           onChange={e => {
             setMessage(e.target.value);
             socket.emit("typing", { name, roomID });
