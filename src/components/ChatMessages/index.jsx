@@ -30,6 +30,7 @@ function ChatMessages({ name, messages, announcement }) {
     <div
       className="nes-container"
       style={{
+        backgroundColor: "#fff",
         height: "100%",
         overflowY: "scroll",
         flexGrow: 1,
