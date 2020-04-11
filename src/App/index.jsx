@@ -51,8 +51,8 @@ class App extends React.Component {
 
   handleExit() {
     const { name, roomID } = this.state;
+    this.setState({ roomID: null, messages: [] });
 
-    this.setState({ roomID: null });
     socket.emit("leave", { roomID, name });
   }
 

@@ -31,6 +31,7 @@ io.on("connection", socket => {
 
   socket.on("leave", ({ roomID, name }) => {
     socket.to(roomID).emit("left", name);
+    socket.leave(roomID);
   });
 
   socket.on("typing", ({ name, roomID }) => {
