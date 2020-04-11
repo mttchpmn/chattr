@@ -12,26 +12,26 @@ class ChatNotificationBar extends Component {
 
   componentDidMount() {
     socket.on("typing", name => {
-      clearTimeout(this.timer);
-      this.setState({ notification: `${name} is typing...` });
-      this.timer = setTimeout(
-        () => this.setState({ notification: null }),
-        2000
-      );
+      this.setNotification(`${name} is typing...`);
     });
 
-    socket.on("new member", name => {
-      clearTimeout(this.timer);
-      this.setState({ notification: `${name} joined the room` });
-      this.timer = setTimeout(
-        () => this.setState({ notification: null }),
-        2000
-      );
+    socket.on("joined", name => {
+      this.setNotification(`${name} joined the room`);
+    });
+
+    socket.on("left", name => {
+      this.setNotification(`${name} left the room`);
     });
   }
 
   componentWillUnmount() {
     clearTimeout(this.timer);
+  }
+
+  setNotification(notification) {
+    clearTimeout(this.timer);
+    this.setState({ notification });
+    this.timer = setTimeout(() => this.setState({ notification: null }), 2000);
   }
 
   render() {

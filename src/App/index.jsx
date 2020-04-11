@@ -13,6 +13,7 @@ import ChatNoticationBar from "../components/ChatNotificationBar";
 // - Use short uuids for rooms
 // - Notification when members leave
 // - Input and error handling
+// - Flash title when new message
 
 class App extends React.Component {
   constructor(props) {
@@ -47,6 +48,13 @@ class App extends React.Component {
     clearTimeout(this.timer);
   }
 
+  handleExit() {
+    const { name, roomID } = this.state;
+
+    this.setState({ roomID: null });
+    socket.emit("leave", { roomID, name });
+  }
+
   render() {
     const { roomID, name, messages, announcement } = this.state;
 
@@ -64,7 +72,7 @@ class App extends React.Component {
         <ChatHeader
           name={name}
           roomID={roomID}
-          handleExit={() => this.setState({ roomID: null })}
+          handleExit={() => this.handleExit()}
         />
         <ChatNoticationBar />
         <ChatMessages

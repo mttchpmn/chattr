@@ -23,7 +23,11 @@ io.on("connection", socket => {
   socket.on("join", ({ joinID, name }) => {
     socket.join(joinID);
     io.to(id).emit("join", joinID);
-    socket.to(joinID).emit("new member", name);
+    socket.to(joinID).emit("joined", name);
+  });
+
+  socket.on("leave", ({ roomID, name }) => {
+    socket.to(roomID).emit("left", name);
   });
 
   socket.on("typing", ({ name, roomID }) => {
