@@ -5,6 +5,8 @@ import { randomColor } from "../colors";
 function ChatHeader({ name, roomID, handleExit }) {
   const [color, setColor] = React.useState("#505050");
 
+  const mobile = window.innerWidth < 800;
+
   return (
     <section
       className="nes-container is-rounded"
@@ -22,13 +24,21 @@ function ChatHeader({ name, roomID, handleExit }) {
       </button>
       <div>
         <h1>chattr.</h1>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: mobile ? "column" : "row",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Hi {name}!</span>
           <CopyToClipboard
             text={roomID}
             onCopy={() => alert("Copied Room ID to clipboard!")}
           >
-            <span style={{ textAlign: "right", color: color }}>
+            <span
+              style={{ textAlign: mobile ? "left" : "right", color: color }}
+            >
               Room ID: {roomID}&#x1f4cb;
             </span>
           </CopyToClipboard>
