@@ -4,6 +4,7 @@ import socket from "../../socket";
 
 function ChatInput({ name, roomID, handleFocus }) {
   const [message, setMessage] = React.useState("");
+  const mobile = window.innerWidth < 500;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,7 +26,13 @@ function ChatInput({ name, roomID, handleFocus }) {
         padding: 5,
       }}
     >
-      <form style={{ width: "100%", display: "flex" }}>
+      <form
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: mobile ? "column" : "row",
+        }}
+      >
         <input
           className="nes-input"
           value={message}
@@ -43,7 +50,11 @@ function ChatInput({ name, roomID, handleFocus }) {
           }
           type="submit"
           onClick={e => handleSubmit(e)}
-          style={{ minWidth: 200, marginLeft: 10 }}
+          style={{
+            minWidth: 200,
+            marginLeft: mobile ? 5 : 10,
+            marginTop: mobile ? 10 : 0,
+          }}
         >
           Send
         </button>

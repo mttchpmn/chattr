@@ -11,8 +11,10 @@ import ChatNoticationBar from "../components/ChatNotificationBar";
 
 // TODO
 // - Input and error handling
+// - Room chat history
+// - Show who's online
 // - Mobile responsiveness
-// - Save earlier messages and show them to new members / room history (?)
+// - Add flag to make room public on creation, name it, and show in list to join
 
 class App extends React.Component {
   constructor(props) {

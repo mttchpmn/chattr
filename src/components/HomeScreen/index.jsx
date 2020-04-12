@@ -16,13 +16,16 @@ function HomeScreen({ handleSubmit }) {
         style={{
           width: "50%",
           margin: "auto",
-          maxWidth: "600px",
+          minWidth: 300,
+          maxWidth: 600,
           backgroundColor: "#fff",
         }}
       >
         <p className="title">chattr</p>
 
         <h2>Create or join room</h2>
+
+        {/* <p>{window.innerWidth}</p> */}
 
         <form>
           <div className="nes-field">
@@ -44,7 +47,9 @@ function HomeScreen({ handleSubmit }) {
               type="text"
               id="join-id"
               autoComplete="off"
-              placeholder="Leave blank for new room"
+              placeholder={
+                window.innerWidth < 1000 ? "" : "Leave blank for new room"
+              }
               value={joinID}
               onChange={e => setJoinID(e.target.value)}
             />
