@@ -28,12 +28,14 @@ class App extends React.Component {
       name: "",
       announcement: null,
       unread: 0,
+      online: 1,
     };
   }
 
   componentDidMount() {
+    const { messages, unread, online } = this.state;
+
     socket.on("chat message", msg => {
-      const { messages, unread } = this.state;
       this.setState({ messages: [...messages, msg], unread: unread + 1 });
       if (document.hidden) document.title = `chattr (${unread})`;
     });
@@ -45,6 +47,17 @@ class App extends React.Component {
     socket.on("join", roomID => {
       this.setState({ roomID });
     });
+
+    socket.on("joined", () =>
+      this.setState(prevState => ({
+        online: prevState.online++, // This needs to be handled on the server side
+      }))
+    );
+    socket.on("left", () =>
+      this.setState(prevState => ({
+        online: prevState.online--, // This needs to be handled on the server side
+      }))
+    );
   }
 
   componentWillUnmount() {
@@ -59,7 +72,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { roomID, name, messages, announcement } = this.state;
+    const { roomID, name, messages, announcement, online } = this.state;
 
     if (!roomID)
       return <HomeScreen handleSubmit={name => this.setState({ name })} />;
@@ -75,6 +88,7 @@ class App extends React.Component {
         <ChatHeader
           name={name}
           roomID={roomID}
+          online={online}
           handleExit={() => this.handleExit()}
         />
         <ChatNoticationBar />

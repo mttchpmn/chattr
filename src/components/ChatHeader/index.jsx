@@ -2,7 +2,7 @@ import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { randomColor } from "../colors";
 
-function ChatHeader({ name, roomID, handleExit }) {
+function ChatHeader({ name, roomID, online, handleExit }) {
   const [color, setColor] = React.useState("#505050");
 
   const mobile = window.innerWidth < 800;
@@ -32,6 +32,7 @@ function ChatHeader({ name, roomID, handleExit }) {
           }}
         >
           <span style={{ fontSize: mobile ? 14 : 16 }}>Hi {name}!</span>
+          <span style={{ fontSize: mobile ? 14 : 16 }}>{online} in room</span>
           <CopyToClipboard
             text={roomID}
             onCopy={() => alert("Copied Room ID to clipboard!")}
