@@ -13,6 +13,7 @@ import ChatNoticationBar from "../components/ChatNotificationBar";
 // - Input and error handling
 // - Room chat history
 // - Show who's online
+// - Change 'send' button to '>' on same line for mobile
 // - Add flag to make room public on creation, name it, and show in list to join
 
 class App extends React.Component {

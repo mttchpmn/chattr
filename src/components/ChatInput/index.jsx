@@ -30,7 +30,7 @@ function ChatInput({ name, roomID, handleFocus }) {
         style={{
           width: "100%",
           display: "flex",
-          flexDirection: mobile ? "column" : "row",
+          // flexDirection: mobile ? "column" : "row",
         }}
       >
         <input
@@ -51,12 +51,11 @@ function ChatInput({ name, roomID, handleFocus }) {
           type="submit"
           onClick={e => handleSubmit(e)}
           style={{
-            minWidth: 200,
-            marginLeft: mobile ? 5 : 10,
-            marginTop: mobile ? 10 : 0,
+            minWidth: mobile ? 60 : 200,
+            marginLeft: 10,
           }}
         >
-          Send
+          {mobile ? ">" : "Send"}
         </button>
       </form>
     </div>

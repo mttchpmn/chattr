@@ -31,13 +31,17 @@ function ChatHeader({ name, roomID, handleExit }) {
             justifyContent: "space-between",
           }}
         >
-          <span>Hi {name}!</span>
+          <span style={{ fontSize: mobile ? 14 : 16 }}>Hi {name}!</span>
           <CopyToClipboard
             text={roomID}
             onCopy={() => alert("Copied Room ID to clipboard!")}
           >
             <span
-              style={{ textAlign: mobile ? "left" : "right", color: color }}
+              style={{
+                textAlign: mobile ? "left" : "right",
+                color: color,
+                fontSize: mobile ? 14 : 16,
+              }}
             >
               Room ID: {roomID}&#x1f4cb;
             </span>
