@@ -39,16 +39,30 @@ io.on("connection", socket => {
   });
 
   socket.on("join", ({ joinID, name }) => {
-    socket.join(joinID);
-    const { messages } = roomCache[joinID];
-    io.to(id).emit("join", { roomID: joinID, messages });
+    const roomID = joinID;
+
+    if (!roomCache[roomID]) {
+      const newRoom = {
+        roomID: roomID,
+        online: 0,
+        messages: [],
+      };
+      roomCache[roomID] = newRoom;
+    }
+
+    socket.join(roomID);
+    roomCache[roomID].online++;
+    io.to(id).emit("join", roomCache[roomID]);
 
     socket.to(joinID).emit("joined", name);
+    socket.to(joinID).emit("room update", roomCache[roomID]);
   });
 
   socket.on("leave", ({ roomID, name }) => {
     socket.to(roomID).emit("left", name);
     socket.leave(roomID);
+    roomCache[roomID].online--;
+    socket.to(roomID).emit("room update", roomCache[roomID]);
 
     // Handle empty room
     io.in(roomID).clients((err, clients) => {

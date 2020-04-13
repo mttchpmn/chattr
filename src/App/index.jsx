@@ -11,9 +11,6 @@ import ChatNoticationBar from "../components/ChatNotificationBar";
 
 // TODO
 // - Input and error handling
-// - Room chat history
-// - Show who's online
-// - Change 'send' button to '>' on same line for mobile
 // - Add flag to make room public on creation, name it, and show in list to join
 
 class App extends React.Component {
@@ -35,7 +32,6 @@ class App extends React.Component {
   componentDidMount() {
     socket.on("chat message", msg => {
       const { messages, unread } = this.state;
-      console.log("msg :", msg);
       this.setState({ messages: [...messages, msg], unread: unread + 1 });
       if (document.hidden) document.title = `chattr (${unread})`;
     });
@@ -44,24 +40,11 @@ class App extends React.Component {
       this.setState({ roomID });
     });
 
-    socket.on("join", ({ roomID, messages }) => {
-      console.log("JOIN");
-      console.log("roomID :", roomID);
-      console.log("this.state :", this.state);
-      this.setState({ roomID, messages });
-      console.log("this.state :", this.state);
+    socket.on("join", ({ roomID, messages, online }) => {
+      this.setState({ roomID, messages, online });
     });
 
-    socket.on("joined", () =>
-      this.setState(prevState => ({
-        online: prevState.online++, // This needs to be handled on the server side
-      }))
-    );
-    socket.on("left", () =>
-      this.setState(prevState => ({
-        online: prevState.online--, // This needs to be handled on the server side
-      }))
-    );
+    socket.on("room update", room => this.setState({ online: room.online }));
   }
 
   componentWillUnmount() {
