@@ -66,8 +66,10 @@ io.on("connection", socket => {
 
     // Handle empty room
     io.in(roomID).clients((err, clients) => {
-      if (!clients.length) console.log("ROOM EMPTY - deleting room from cache");
-      delete roomCache[roomID];
+      if (!clients.length) {
+        console.log("ROOM EMPTY - deleting room from cache");
+        delete roomCache[roomID];
+      }
     });
   });
 
@@ -77,12 +79,8 @@ io.on("connection", socket => {
 
   socket.on("chat message", msg => {
     const { name, text, roomID } = msg;
-
-    console.log("roomCache", roomCache);
     roomCache[roomID].messages.push(msg);
-
     io.to(roomID).emit("chat message", { name, text });
-    console.log("roomCache", roomCache);
   });
 });
 
