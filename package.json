@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^7.2.1",
     "express": "^4.17.1",
     "nes.css": "^2.3.0",
-    "node-cache": "^5.1.0",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
