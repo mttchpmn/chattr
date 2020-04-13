@@ -33,9 +33,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const { messages, unread, online } = this.state;
-
     socket.on("chat message", msg => {
+      const { messages, unread } = this.state;
+      console.log("msg :", msg);
       this.setState({ messages: [...messages, msg], unread: unread + 1 });
       if (document.hidden) document.title = `chattr (${unread})`;
     });
@@ -44,8 +44,12 @@ class App extends React.Component {
       this.setState({ roomID });
     });
 
-    socket.on("join", roomID => {
-      this.setState({ roomID });
+    socket.on("join", ({ roomID, messages }) => {
+      console.log("JOIN");
+      console.log("roomID :", roomID);
+      console.log("this.state :", this.state);
+      this.setState({ roomID, messages });
+      console.log("this.state :", this.state);
     });
 
     socket.on("joined", () =>
