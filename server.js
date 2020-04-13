@@ -32,6 +32,12 @@ io.on("connection", socket => {
   socket.on("leave", ({ roomID, name }) => {
     socket.to(roomID).emit("left", name);
     socket.leave(roomID);
+
+    // Handle empty room
+    io.in(roomID).clients((err, clients) => {
+      if (!clients.length) console.log("ROOM EMPTY");
+      console.log(`Clients left in room : ${clients.length}`);
+    });
   });
 
   socket.on("typing", ({ name, roomID }) => {
